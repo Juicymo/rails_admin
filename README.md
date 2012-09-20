@@ -26,15 +26,46 @@ Add this to your `Gemfile`:
 gem 'rails_admin', :git => 'git://github.com/Juicymo/rails_admin.git'
 ```
 
+Run:
+
+```bash
+$ bundle install
+```
+
+Then run installation script:
+
+```bash
+$ rails g rails_admin:install
+```
+
+Then finally migrate your database by:
+
+```bash
+$ bundle exec rake db:migrate
+```
+
+## Usage
+
+Start the server:
+
+```bash
+$ rails server
+```
+
+You should now be able to administer your site at
+[http://localhost:3000/admin](http://localhost:3000/admin).
+
 ## New Juicy Features
 
 * Added support for checkbox groups field forms for 1:N (has_many) and M:N (has_and_belongs_to_many) associations.
 
-We are making regular updates to stay up-to-date with the source sferik's [Rails Admin repo][rails-admin]. And yes we will make pull requests to it, but this will take some time to make it in a clean way...
-
-*Note*: Rest of this readme below this line is currently just copied from the source [Rails Admin repo][rails-admin]... 
+*Note* 
+ * *We are making regular updates to stay up-to-date with the source sferik's [Rails Admin repo][rails-admin]. And yes we will make pull requests to it, but this will take some time to make it in a clean way...*
+ * *Rest of this readme below this line is currently just copied from the source [Rails Admin repo][rails-admin]...*
 
 [rails-admin]: https://github.com/sferik/rails_admin
+
+***
 
 ## Announcements
 
@@ -129,15 +160,6 @@ Optionally, you may wish to set up [Cancan](https://github.com/ryanb/cancan),
 [PaperTrail](https://github.com/airblade/paper_trail), [CKeditor](https://github.com/galetahub/ckeditor), [CodeMirror](https://github.com/fixlr/codemirror-rails)
 
 More on that in the [Wiki](https://github.com/sferik/rails_admin/wiki)
-
-## Usage
-
-Start the server:
-
-    $ rails server
-
-You should now be able to administer your site at
-[http://localhost:3000/admin](http://localhost:3000/admin).
 
 ## Configuration
 
