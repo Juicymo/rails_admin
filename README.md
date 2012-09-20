@@ -30,9 +30,7 @@ gem 'rails_admin', :git => 'git://github.com/Juicymo/rails_admin.git'
 
 * Added support for checkbox groups field forms for 1:N (has_many) and M:N (has_and_belongs_to_many) associations.
 
-
-## We are making regular updates to stay up-to-date with the source sferik's [Rails Admin repo][rails-admin]. And yes we will make pull requests to it, but this will take some time to make it in a clean way...
-
+We are making regular updates to stay up-to-date with the source sferik's [Rails Admin repo][rails-admin]. And yes we will make pull requests to it, but this will take some time to make it in a clean way...
 
 *Note*: Rest of this readme below this line is currently just copied from the source [Rails Admin repo][rails-admin]... 
 
