@@ -1,15 +1,15 @@
-# RailsAdmin [![Build Status](https://secure.travis-ci.org/sferik/rails_admin.png?branch=master)][travis] [![Dependency Status](https://gemnasium.com/sferik/rails_admin.png?travis)][gemnasium] [![Click here to lend your support to: RailsAdmin and make a donation at www.pledgie.com !](https://www.pledgie.com/campaigns/15917.png)][pledgie]
-RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data.
+# Rails Admin 
 
-[travis]: http://travis-ci.org/sferik/rails_admin
-[gemnasium]: https://gemnasium.com/sferik/rails_admin
-[pledgie]: http://www.pledgie.com/campaigns/15917
+Rails Admin is a Rails engine that provides an easy-to-use interface for managing your data.
 
 It started as a port of [MerbAdmin][merb-admin] to Rails 3 and was implemented
 as a [Ruby Summer of Code project][rubysoc] by [Bogdan Gaza][hurrycane] with
 mentors [Erik Michaels-Ober][sferik], [Yehuda Katz][wycats], [Luke van der
 Hoeven][plukevdh], and [Rein Henrichs][reinh].
 
+We at Juicymo [Juicymo][juicymo] have just added few more features to this wonderful tool.
+
+[juicymo]: https://github.com/juicymo
 [merb-admin]: https://github.com/sferik/merb-admin
 [rubysoc]: http://www.rubysoc.org/projects
 [hurrycane]: https://github.com/hurrycane
@@ -17,6 +17,19 @@ Hoeven][plukevdh], and [Rein Henrichs][reinh].
 [wycats]: https://github.com/wycats
 [plukevdh]: https://github.com/plukevdh
 [reinh]: https://github.com/reinh
+
+
+## New Juicy Features
+
+* Added support for checkbox groups field forms for 1:N (has_many) and M:N (has_and_belongs_to_many) associations.
+
+
+## We are making regular updates to stay up-to-date with the source sferik's [Rails Admin repo][rails-admin]. And yes we will make pull requests to it, but this will take some time to make it in a clean way...
+
+
+*Note*: Rest of this readme below this line is currently just copied from the source [Rails Admin repo][rails-admin]... 
+
+[rails-admin]: https://github.com/sferik/rails_admin
 
 ## Announcements
 
