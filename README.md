@@ -18,6 +18,13 @@ We at Juicymo [Juicymo][juicymo] have just added few more features to this wonde
 [plukevdh]: https://github.com/plukevdh
 [reinh]: https://github.com/reinh
 
+## Installation
+
+Add this to your `Gemfile`:
+
+```ruby
+gem 'rails_admin', :git => 'git://github.com/Juicymo/rails_admin.git'
+```
 
 ## New Juicy Features
 
