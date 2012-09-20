@@ -1,0 +1,57 @@
+:ruby
+  related_id = params[:associations] && params[:associations][field.name.to_s]
+  config = field.associated_model_config
+  source_abstract_model = RailsAdmin.config(form.object.class).abstract_model
+
+  if form.object.new_record? && related_id.present? && related_id != 'new'
+    selected = [config.abstract_model.get(related_id)]
+  else
+    selected = form.object.send(field.name)
+  end
+  selected_ids = selected.map{|s| s.send(field.associated_primary_key)}
+
+  current_action = params[:action].in?(['create', 'new']) ? 'create' : 'update'
+  
+  xhr = !field.associated_collection_cache_all
+  
+  collection = if xhr
+    selected.map { |o| [o.send(field.associated_object_label_method), o.send(field.associated_primary_key)] }
+  else
+    i = 0
+    controller.list_entries(config, :index, field.associated_collection_scope, false).map { |o| [o.send(field.associated_object_label_method), o.send(field.associated_primary_key)] }.sort_by {|a| [selected_ids.index(a[1]) || selected_ids.size, i+=1] }
+  end
+  
+  i = 0
+  all_values = controller.list_entries(config, :index, field.associated_collection_scope, false).map { |o| [o.send(field.associated_object_label_method), o.send(field.associated_primary_key)] }.sort_by {|a| [selected_ids.index(a[1]) || selected_ids.size, i+=1] }
+  
+  js_data = {
+    :xhr => xhr,
+    :'edit-url' => (authorized?(:edit, config.abstract_model) ? edit_path(:model_name => config.abstract_model.to_param, :id => '__ID__') : ''),
+    :remote_source => index_path(config.abstract_model, :source_object_id => form.object.id, :source_abstract_model => source_abstract_model.to_param, :associated_collection => field.name, :current_action => current_action, :compact => true),
+    :sortable => !!field.orderable,
+    :cacheAll => !!field.associated_collection_cache_all,
+    :regional => {
+      :chooseAll => t("admin.misc.chose_all"),
+      :chosen    => t("admin.misc.chosen", :name => config.label_plural),
+      :clearAll  => t("admin.misc.clear_all"),
+      :search    => t("admin.misc.search"),
+      :up        => t("admin.misc.up"),
+      :down      => t("admin.misc.down")
+    }
+  }
+  
+
+- selected_ids = (hdv = field.html_default_value).nil? ? selected_ids : hdv
+- n = 3
+- data = []
+- all_values.sort {|x, y| x[0] <=> y[0] }.each_with_index do |item, index|
+  - (0..(n-1)).each do |p|
+    - data[p] ||= []
+    - data[p] << item if index % n == p
+- data.each_with_index do |slice, c|
+  %div{:class => [:column, "col-#{c}"]}
+    - slice.each do |item|
+      %div.checkbox_field
+        = check_box_tag "#{form.dom_name(field)}", item[1], selected_ids.include?(item[1]), {:id => "#{field.method_name}_#{item[1]}"}
+        %label{:for => "#{field.method_name}_#{item[1]}"}
+          = item[0]
