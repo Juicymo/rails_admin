@@ -20,6 +20,17 @@ We at Juicymo [Juicymo][juicymo] have just added few more features to this wonde
 
 ***
 
+## New Juicy Features
+
+* Added support for checkbox groups field forms for 1:N (has_many) and M:N (has_and_belongs_to_many) associations.
+
+*Note* 
+ * *We are making regular updates to stay up-to-date with the source sferik's [Rails Admin repo][rails-admin]. And yes we will make pull requests to it, but this will take some time to make it in a clean way...*
+
+[rails-admin]: https://github.com/sferik/rails_admin
+
+***
+
 ## Installation
 
 Add this to your `Gemfile`:
@@ -146,15 +157,6 @@ end
 ```
 
 ***
-
-## New Juicy Features
-
-* Added support for checkbox groups field forms for 1:N (has_many) and M:N (has_and_belongs_to_many) associations.
-
-*Note* 
- * *We are making regular updates to stay up-to-date with the source sferik's [Rails Admin repo][rails-admin]. And yes we will make pull requests to it, but this will take some time to make it in a clean way...*
- 
-[rails-admin]: https://github.com/sferik/rails_admin
 
 ## Support
 
