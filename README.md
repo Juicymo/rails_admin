@@ -18,6 +18,8 @@ We at Juicymo [Juicymo][juicymo] have just added few more features to this wonde
 [plukevdh]: https://github.com/plukevdh
 [reinh]: https://github.com/reinh
 
+***
+
 ## Installation
 
 Add this to your `Gemfile`:
@@ -31,6 +33,8 @@ Run:
 ```bash
 $ bundle install
 ```
+
+Configure your database in the `database.yml` file.
 
 Then run installation script:
 
@@ -54,6 +58,94 @@ $ rails server
 
 You should now be able to administer your site at
 [http://localhost:3000/admin](http://localhost:3000/admin).
+
+***
+
+## Test
+
+The empty administraiton interface just with the User model is nice, but how to add some more features to it?
+
+Try this:
+
+```bash
+$ rails generate model Lecture name:string perex:text
+```
+
+```bash
+$ rails generate model Room name:string description:text
+```
+
+```bash
+$ rails generate migration AddSlidesAndRoomToLecture slides:integer room:references
+```
+
+Because of limitation in the default rails migration generator when comes to `:references` field type, we need to adjust the
+generated migration a bit. Just replace content of file `db/migrate/...add_slides_and_room_to_lecture.rb` with this:
+
+```ruby
+class AddSlidesAndRoomToLecture < ActiveRecord::Migration
+  def up
+    change_table :lectures do |t|
+      t.references :room
+      t.integer :slides
+    end
+  end
+
+  def down
+    remove_index :lectures, :room_id
+    remove_column :lectures, :room_id
+    remove_column :lectures, :slides
+  end
+end
+```
+
+Now migrate your database once more by:
+
+```bash
+$ bundle exec rake db:migrate
+```
+
+Now setup you associations:
+
+To `models/lecture.rb` add:
+
+```ruby
+belongs_to :room
+
+attr_accessible :name, :perex, :slides, :room_id
+```
+
+To `models/room.rb` add:
+
+```ruby
+has_many :lectures
+
+attr_accessible :description, :name, :lecture_ids
+```
+
+Now start the server once more:
+
+```bash
+$ rails server
+```
+
+Now, do you want to have checkboxes instead of the ugly M:N form widget for the lectures field in the add/edit room form? No problem, just add this to `config/initializers/rails_admin.rb`:
+
+```ruby
+config.model Room do
+  edit do
+    group :default do
+      field :name
+      field :description
+      field :lectures do
+        partial "form_checkboxes_multiselect"
+      end
+    end
+  end
+end
+```
+
+***
 
 ## New Juicy Features
 
